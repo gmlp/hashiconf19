@@ -1,0 +1,21 @@
+image:
+  tag: 1.2.2-alpine
+
+ingressController:
+  enabled: true 
+  image:
+    tag: 0.5.0
+
+env:
+  PLUGINS: bundled
+
+proxy:
+  type: LoadBalancer
+  tls:
+    servicePort: 443
+
+
+# Konga is going to reach this administration panel through Konga UI
+#  using the k8s internal network
+admin:
+  type: ClusterIP 
