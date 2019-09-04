@@ -1,0 +1,15 @@
+name: konga
+home: https://pantsel.github.io/konga
+version: 0.1.0
+appVersion: 1.0
+description: Chart for Konga dashboard
+keywords:
+- konga
+- dashboard
+- kong
+icon: https://pantsel.github.io/konga/img/konga-logo.png
+sources:
+- https://pantsel.github.io/konga
+maintainers:
+- name: xfrarod
+  email: franciscoj.rodriguez@outlook.com

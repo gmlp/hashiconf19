@@ -1,0 +1,85 @@
+# Default values for konga.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: pantsel/konga
+  tag: 0.13.0
+  pullPolicy: IfNotPresent
+
+prepareImage:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  annotations: {}
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Specify Konga variables for configurations
+# https://hub.docker.com/r/pantsel/konga/
+env:
+  # Specify The port that will be used by Konga's server
+  port: 1337
+  # The database that Konga will use. If not set, the localDisk db will be used.
+  # Supported Values: mongo, mysql, postgres, sqlserver
+  database: postgres
+
+  environment: production
+  # The time in ms that Konga will wait for startup tasks to finish before exiting the process.
+  hook_timeout: 60000
+  # The logging level: silly, debug, info, warn, error
+  # Default Values: debug on dev environment & warn on prod.
+  # log_level:
+  # The secret that will be used to sign JWT tokens issued by Konga
+  # token_secret:
+  # If you want to use SSL, this will be the absolute path to the .key file.
+  # Both ssl_key_path & ssl_crt_path must be set.
+  # ssl_key_path:
+  # If you want to use SSL, this will be the absolute path to the .crt file.
+  # Both ssl_key_path & ssl_crt_path must be set.
+  # ssl_crt_path:
+
+# PostgreSQL chart configs
+postgresql:
+  enabled: true
+  postgresUser: konga
+  postgresPassword: kong4Pwd
+  postgresDatabase: konga_database
+  service:
+    port: 5432
+  prepareDb: true
