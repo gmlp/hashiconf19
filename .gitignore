@@ -1,0 +1,9 @@
+# Helm dependencies
+#charts/*/charts
+
+# terraform
+.terraform
+plan
+terraform.tfstate*
+
+*.swp
